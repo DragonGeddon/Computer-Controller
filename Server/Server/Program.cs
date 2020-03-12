@@ -28,8 +28,13 @@ public class Program
             int size = ClientSocket.Receive(msg, 0, msg.Length, SocketFlags.None);
             string raw = System.Text.Encoding.ASCII.GetString(msg);
             string[] data = raw.Split(',');
-            Console.WriteLine(data[1] + " connected under the IP:" + ClientSocket.RemoteEndPoint + " attempting to call the " + data[0] + " method.");
-            if (data[0].ToLower().Equals("login"))
+            try
+            {
+                Console.WriteLine(data[1] + " connected under the IP:" + ClientSocket.RemoteEndPoint + " attempting to call the " + data[0] + " method.");
+            } catch (Exception)
+            {
+            }
+                if (data[0].ToLower().Equals("login"))
             {
                 //Handler
                 ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes("yes"), 0, System.Text.Encoding.ASCII.GetBytes("yes").Length, SocketFlags.None);
@@ -69,7 +74,7 @@ public class Program
 
             else
             {
-                Console.WriteLine("Hacker detected!");
+                Console.WriteLine("Device Connected!");
             }
         }
     }

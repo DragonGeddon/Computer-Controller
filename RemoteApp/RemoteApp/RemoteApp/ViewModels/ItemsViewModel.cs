@@ -8,6 +8,9 @@ using Xamarin.Forms;
 using RemoteApp.Models;
 using RemoteApp.Views;
 using System.IO;
+using System.Net.Sockets;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace RemoteApp.ViewModels
 {
@@ -40,12 +43,13 @@ namespace RemoteApp.ViewModels
 
             try
             {
+
                 string ip = "";
                 try
                 {
-                    string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                    string filename = Path.Combine(path, "conn.txt");
-                    using (StreamReader sr = new StreamReader(filename))
+                    string pp = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                    string fn = Path.Combine(pp, "conn.txt");
+                    using (StreamReader sr = new StreamReader(fn))
                     {
                         String line = sr.ReadToEnd();
                         ip = line;
@@ -55,16 +59,39 @@ namespace RemoteApp.ViewModels
                 {
                     Console.WriteLine("The file could not be read:");
                 }
-                Items.Clear();
 
+                bool go = false;
+
+
+                IPAddress IP;
+                if (IPAddress.TryParse(ip, out IP))
+                {
+                    Socket s = new Socket(AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp);
+                    s.ReceiveTimeout = 3000;
+                    s.SendTimeout = 3000;
+                    try
+                    {
+                        s.Connect(IP, 8883);
+                        go = true;
+                        s.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        // something went wrong
+                        go = false;
+                    }
+                }
+
+
+                Items.Clear();
+                if(go) {
                 tcp server = new tcp();
 
-                if (server.tcpTest(ip))
-                {
+                string[] arr = server.tcpProc(ip).Split(',');
 
-                    string[] arr = server.tcpProc(ip).Split(',');
-
-                    for (int i = 0, j = 0; i < arr.Length; i += 2)
+                    for (int i = 0; i < arr.Length; i += 2)
                     {
                         if (arr[i].ToLower().Contains("host") || arr[i].ToLower().Contains("microsoft") || arr[i].ToLower().Equals("idle")
                             || arr[i].ToLower().Equals("system") || arr[i].ToLower().Equals("registry")) { }

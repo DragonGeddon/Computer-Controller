@@ -29,7 +29,7 @@ namespace RemoteApp.Views
                 try
                 {
                     Int32 port = 8883;
-                    TcpClient client = new TcpClient(IP.Text, port);
+                    TcpClient client = new TcpClient("10.0.0.250", port);
 
                     Byte[] data = System.Text.Encoding.ASCII.GetBytes("login,Hoff");
 
@@ -74,7 +74,7 @@ namespace RemoteApp.Views
             {
                 IP.IsVisible = false;
                 connLbl.IsVisible = false;
-                powerBtn.Text = "Power On";
+                powerBtn.Text = "Power Off";
 
                 //Do power on stuff here..
                 /*
@@ -97,7 +97,7 @@ namespace RemoteApp.Views
             {
                 IP.IsVisible = true;
                 connLbl.IsVisible = true;
-                powerBtn.Text = "Power Off";
+                powerBtn.Text = "Power On";
                 //Do power on stuff here..
                 /*
                  * 

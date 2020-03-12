@@ -32,27 +32,17 @@ namespace RemoteApp.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string filename = Path.Combine(path, "conn.txt");
             string ip = "";
-            try
+            using (var streamWriter = new StreamReader(filename, false))
             {
-                using (StreamReader sr = new StreamReader("conn.txt"))
-                {
-                    String line = sr.ReadToEnd();
-                    ip = line;
-                }
-            }
-            catch (IOException e2)
-            {
-                Console.WriteLine("The file could not be read:");
+                ip = streamWriter.ReadLine();
             }
             tcp server = new tcp();
             //MessagingCenter.Send(this, "AddItem", Item);
-            bool opener = server.tcpOpen(ip, Item.Text);
+            server.tcpOpen(ip, Item.Text);
             await Navigation.PopModalAsync();
-            if(opener)
-            {
-                await DisplayAlert("Alert", "Could not find the process..", "OK");
-            }
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)

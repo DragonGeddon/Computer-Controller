@@ -16,8 +16,6 @@ namespace RemoteApp.Views
     {
         ItemDetailViewModel viewModel;
 
-        Item selectedItem;
-
         public ItemDetailPage(ItemDetailViewModel viewModel)
         {
             InitializeComponent();
@@ -42,23 +40,16 @@ namespace RemoteApp.Views
 
         public async void killTask(object sender, EventArgs e)
         {
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+            string filename = Path.Combine(path, "conn.txt");
+            string ip = "";
+            using (var streamWriter = new StreamReader(filename, false))
+            {
+                ip = streamWriter.ReadLine();
+            }
             tcp server = new tcp();
             string temp = procID.Text;
-            string ip = "";
-            try
-            {
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                string filename = Path.Combine(path, "conn.txt");
-                using (StreamReader sr = new StreamReader(filename))
-                {
-                    String line = sr.ReadToEnd();
-                    ip = line;
-                }
-            }
-            catch (IOException e2)
-            {
-                Console.WriteLine("The file could not be read:");
-            }
+            await DisplayAlert("Alert", temp + ip, "OK");
             server.tcpKill(ip, Int32.Parse(procID.Text));
 
         }
