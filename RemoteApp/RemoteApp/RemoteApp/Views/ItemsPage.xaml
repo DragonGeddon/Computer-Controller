@@ -10,7 +10,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Open" Clicked="AddItem_Clicked" />
-        <ToolbarItem Text="Open From Directory" Clicked="AddItem_Clicked" />
+        <ToolbarItem Text="Open From Directory" Clicked="OpenItem_Clicked" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>

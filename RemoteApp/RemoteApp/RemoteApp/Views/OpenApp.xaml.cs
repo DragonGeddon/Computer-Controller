@@ -52,7 +52,8 @@ namespace RemoteApp.Views
             if (item == null)
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            //open the selected app
+            //await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
 
             // Manually deselect item.
             AppsListView.SelectedItem = null;
