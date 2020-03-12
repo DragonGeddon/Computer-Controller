@@ -47,12 +47,22 @@ namespace RemoteApp.ViewModels
                 string ip = "";
                 try
                 {
+                    String line = "";
                     string pp = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
                     string fn = Path.Combine(pp, "conn.txt");
                     using (StreamReader sr = new StreamReader(fn))
                     {
-                        String line = sr.ReadToEnd();
+                        line = sr.ReadToEnd();
                         ip = line;
+                    }
+                    line = "";
+                    using (StreamReader sr = new StreamReader("shortcuts.txt"))
+                    {
+                        while ((line = sr.ReadLine()) != null)
+                        {
+                            Apps app = new Apps();
+                            app.Dir = line;
+                        }
                     }
                 }
                 catch (IOException e)
