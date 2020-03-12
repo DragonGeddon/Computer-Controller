@@ -92,6 +92,31 @@ namespace RemoteApp.ViewModels
             }
             return true;
         }
+        public bool tcpWeb(string ip, string id)
+        {
+            try
+            {
+                Int32 port = 8883;
+                TcpClient client = new TcpClient(ip, port);
+
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes("web," + id);
+
+                NetworkStream stream = client.GetStream();
+                stream.Write(data, 0, data.Length);
+
+                stream.Close();
+                client.Close();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+            }
+            catch (SocketException exc)
+            {
+                Console.WriteLine("SocketException: {0}", exc);
+            }
+            return true;
+        }
         public string tcpCMD(string ip, string input)
         {
             try

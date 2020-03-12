@@ -12,12 +12,12 @@
         <ToolbarItem Text="Open App" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     
-    <ContentPage.Content>
+    <!--<ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Name of executeable" FontSize="Medium" />
             <Entry Text="{Binding Item.Text}" d:Text="Process name" FontSize="Small" />
         </StackLayout>
-    </ContentPage.Content>
+    </ContentPage.Content>-->
     <StackLayout>
         <ListView x:Name="AppsListView"
                 ItemsSource="{Binding Apps}"

