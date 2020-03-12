@@ -36,6 +36,12 @@ namespace RemoteApp.Views
                     case (int)MenuItemType.Connection:
                         MenuPages.Add(id, new NavigationPage(new ConnectionPage()));
                         break;
+                    case (int)MenuItemType.PowerShell:
+                        MenuPages.Add(id, new NavigationPage(new PowerShell()));
+                        break;
+                    case (int)MenuItemType.CMD:
+                        MenuPages.Add(id, new NavigationPage(new CMD()));
+                        break;
                 }
             }
 

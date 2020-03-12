@@ -16,8 +16,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CMD.xaml.cs">
+      <DependentUpon>CMD.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\PowerShell.xaml.cs">
+      <DependentUpon>PowerShell.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ConnectionPage.xaml.cs">
       <DependentUpon>ConnectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewItemPage.xaml.cs">
+      <DependentUpon>NewItemPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>

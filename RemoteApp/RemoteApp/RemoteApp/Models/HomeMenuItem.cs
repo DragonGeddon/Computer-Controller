@@ -7,7 +7,9 @@ namespace RemoteApp.Models
     public enum MenuItemType
     {
         Browse,
-        Connection
+        Connection,
+        PowerShell,
+        CMD
     }
     public class HomeMenuItem
     {

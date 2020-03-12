@@ -21,7 +21,9 @@ namespace RemoteApp.Views
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
-                new HomeMenuItem {Id = MenuItemType.Connection, Title="Connection" }
+                new HomeMenuItem {Id = MenuItemType.Connection, Title="Connection" },
+                new HomeMenuItem {Id = MenuItemType.PowerShell, Title="PowerShell" },
+                new HomeMenuItem {Id = MenuItemType.CMD, Title="CMD" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

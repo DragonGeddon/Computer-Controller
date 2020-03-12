@@ -92,5 +92,37 @@ namespace RemoteApp.ViewModels
             }
             return true;
         }
+        public string tcpCMD(string ip, string input)
+        {
+            try
+            {
+                Int32 port = 8883;
+                TcpClient client = new TcpClient(ip, port);
+
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes("cmd," + input);
+
+                NetworkStream stream = client.GetStream();
+                stream.Write(data, 0, data.Length);
+                data = new Byte[8192];
+
+                String responseData = String.Empty;
+
+                Int32 bytes = stream.Read(data, 0, data.Length);
+                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
+
+                stream.Close();
+                client.Close();
+                return responseData;
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+            }
+            catch (SocketException exc)
+            {
+                Console.WriteLine("SocketException: {0}", exc);
+            }
+            return "Something went wrong.";
+        }
     }
 }
