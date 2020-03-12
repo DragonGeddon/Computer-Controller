@@ -46,6 +46,18 @@ namespace RemoteApp.Views
             await Navigation.PopModalAsync();
         }
 
+        async void OnAppsSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem as Item;
+            if (item == null)
+                return;
+
+            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+
+            // Manually deselect item.
+            AppsListView.SelectedItem = null;
+        }
+
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             await Navigation.PopModalAsync();
