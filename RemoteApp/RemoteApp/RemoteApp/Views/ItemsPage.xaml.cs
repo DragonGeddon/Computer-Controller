@@ -44,6 +44,11 @@ namespace RemoteApp.Views
             await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
         }
 
+        async void OpenItem_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new OpenApp()));
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

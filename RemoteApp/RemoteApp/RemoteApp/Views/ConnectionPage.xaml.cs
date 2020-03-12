@@ -45,6 +45,7 @@ namespace RemoteApp.Views
                         }
                         catch (Exception ex)
                         {
+                            await DisplayAlert("Alert", "Couldn't Connect!", "OK");
                             go = false;
                         }
                     }

@@ -19,6 +19,9 @@
     <Compile Update="Views\CMD.xaml.cs">
       <DependentUpon>CMD.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\OpenApp.xaml.cs">
+      <DependentUpon>OpenApp.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PowerShell.xaml.cs">
       <DependentUpon>PowerShell.xaml</DependentUpon>
     </Compile>
