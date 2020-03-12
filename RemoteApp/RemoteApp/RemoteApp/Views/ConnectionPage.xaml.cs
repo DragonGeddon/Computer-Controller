@@ -5,6 +5,7 @@ using System.Net;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using System.Net.Sockets;
+using RemoteApp.ViewModels;
 
 namespace RemoteApp.Views
 {
@@ -122,10 +123,8 @@ namespace RemoteApp.Views
                 IP.IsVisible = true;
                 connLbl.IsVisible = true;
                 powerBtn.Text = "Power On";
-                //Do power on stuff here..
-                /*
-                 * 
-                 */
+                tcp server = new tcp();
+                server.tcpShutdown(IP.Text);
             }
 
         }

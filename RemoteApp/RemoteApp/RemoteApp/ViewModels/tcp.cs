@@ -124,5 +124,30 @@ namespace RemoteApp.ViewModels
             }
             return "Something went wrong.";
         }
+
+        public void tcpShutdown(string ip)
+        {
+            try
+            {
+                Int32 port = 8883;
+                TcpClient client = new TcpClient(ip, port);
+
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes("shutdown");
+
+                NetworkStream stream = client.GetStream();
+                stream.Write(data, 0, data.Length);
+
+                stream.Close();
+                client.Close();
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("ArgumentNullException: {0}", ex);
+            }
+            catch (SocketException exc)
+            {
+                Console.WriteLine("SocketException: {0}", exc);
+            }
+        }
     }
 }

