@@ -15,15 +15,16 @@ namespace RemoteApp.Views
     [DesignTimeVisible(false)]
     public partial class OpenApp : ContentPage
     {
-        public Item Item { get; set; }
+        ItemsViewModel viewModel;
+        public Apps App { get; set; }
 
         public OpenApp()
         {
             InitializeComponent();
-
-            Item = new Item
+            BindingContext = viewModel = new ItemsViewModel();
+            App = new Apps
             {
-                Text = "Item name",
+                Dir = "Item name",
                 //Description = "This is an item description."
             };
 
@@ -41,7 +42,7 @@ namespace RemoteApp.Views
             }
             tcp server = new tcp();
             //MessagingCenter.Send(this, "AddItem", Item);
-            server.tcpOpen(ip, Item.Text);
+            server.tcpOpen(ip, App.Dir);
             await Navigation.PopModalAsync();
         }
 
