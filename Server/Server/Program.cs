@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Text;
 using System.Management.Automation.Runspaces;
 using System.Management.Automation;
+using System.IO;
+using System.Collections.Generic;
 
 public class Program
 {
@@ -54,6 +56,16 @@ public class Program
                     list += "" + theprocess.ProcessName + "," + theprocess.Id + ",";
                 }
                 ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes(list), 0, System.Text.Encoding.ASCII.GetBytes(list).Length, SocketFlags.None);
+                Console.WriteLine("sent processes");
+            }
+            else if (data[0].ToLower().Equals("apps"))
+            {
+                string apps = "";
+                foreach (var file in new DirectoryInfo(@"C:\Users\Spencer Crawford\Desktop").GetFiles("*.lnk"))
+                {
+                    apps += file.FullName + ",";
+                }
+                ClientSocket.Send(System.Text.Encoding.ASCII.GetBytes(apps), 0, System.Text.Encoding.ASCII.GetBytes(list).Length, SocketFlags.None);
                 Console.WriteLine("sent processes");
             }
             else if (data[0].ToLower().Equals("kill"))
