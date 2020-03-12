@@ -15,13 +15,13 @@ namespace RemoteApp.Views
     [DesignTimeVisible(false)]
     public partial class OpenApp : ContentPage
     {
-        ItemsViewModel viewModel;
+        AppsViewModel viewModel;
         public Apps App { get; set; }
 
         public OpenApp()
         {
             InitializeComponent();
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new AppsViewModel();
             App = new Apps
             {
                 Dir = "Item name",
