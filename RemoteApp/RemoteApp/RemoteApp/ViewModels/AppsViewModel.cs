@@ -18,7 +18,7 @@ namespace RemoteApp.ViewModels
     {
         public ObservableCollection<Item> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-        public Apps App { get; private set; }
+        public ObservableCollection<Apps> apps { get; private set; }
 
         public AppsViewModel()
         {
@@ -56,12 +56,13 @@ namespace RemoteApp.ViewModels
                         ip = line;
                     }
                     line = "";
-                    using (StreamReader sr = new StreamReader("shortcuts.txt"))
+                    using (StreamReader sr = new StreamReader("C:/Users/Spencer Crawford/Documents/GitHub/ComputerController/shortcuts.txt"))
                     {
                         while ((line = sr.ReadLine()) != null)
                         {
                             Apps app = new Apps();
                             app.Dir = line;
+                            apps.Add(app);
                         }
                     }
                 }

@@ -26,7 +26,7 @@ namespace RPIComputerController
                         {
                             files.Add(file);
                             filePaths.Add(file.FullName);
-                        }*/
+                        }*//*
 
             foreach (var file in new DirectoryInfo(@"C:\Users\Spencer Crawford\Desktop").GetFiles("*.lnk"))
             {
@@ -34,7 +34,7 @@ namespace RPIComputerController
                 filePaths.Add(file.FullName);
             }
 
-            using (StreamWriter sw = new StreamWriter("shortcuts.txt"))
+            using (StreamWriter sw = new StreamWriter("C:/Users/Spencer Crawford/Documents/GitHub/ComputerController/shortcuts.txt"))
             {
                 foreach (string Path in filePaths)
                 {
@@ -42,7 +42,9 @@ namespace RPIComputerController
                 }
             }
 
-            //startApp(filePaths[0] + ".exe");
+            //startApp(filePaths[0] + ".exe");*/
+
+            startWebPage("http://google.com/");
 
         }
 
@@ -114,7 +116,7 @@ namespace RPIComputerController
 
         private static void startWebPage(string url)
         {
-            Process.Start(url);
+            System.Diagnostics.Process.Start("http://www.c-sharpcorner.com/Default.aspx");
         }
 
         private static void shutdown(bool doRestart)
