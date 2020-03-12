@@ -9,8 +9,9 @@
              x:Name="BrowseItemsPage">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Web" Clicked="Web_Clicked" />
         <ToolbarItem Text="Open" Clicked="AddItem_Clicked" />
-        <ToolbarItem Text="Open From Directory" Clicked="OpenItem_Clicked" />
+        <ToolbarItem Text="Apps" Clicked="OpenItem_Clicked" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>

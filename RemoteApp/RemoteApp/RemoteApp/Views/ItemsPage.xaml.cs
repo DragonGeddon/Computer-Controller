@@ -48,6 +48,10 @@ namespace RemoteApp.Views
         {
             await Navigation.PushModalAsync(new NavigationPage(new OpenApp()));
         }
+        async void Web_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new NavigationPage(new OpenWebsite()));
+        }
 
         protected override void OnAppearing()
         {
