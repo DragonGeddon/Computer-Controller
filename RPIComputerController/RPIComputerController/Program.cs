@@ -44,7 +44,10 @@ namespace RPIComputerController
 
             //startApp(filePaths[0] + ".exe");*/
 
-            startWebPage("http://google.com/");
+            Process proc = new Process();
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.FileName = "http://stackoverflow.com";
+            proc.Start();
 
         }
 
@@ -116,7 +119,10 @@ namespace RPIComputerController
 
         private static void startWebPage(string url)
         {
-            System.Diagnostics.Process.Start("http://www.c-sharpcorner.com/Default.aspx");
+            Process proc = new Process();
+            proc.StartInfo.UseShellExecute = true;
+            proc.StartInfo.FileName = url;
+            proc.Start();
         }
 
         private static void shutdown(bool doRestart)
